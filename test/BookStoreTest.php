@@ -35,12 +35,12 @@ class BookStoreTest extends TestCase
         $bookstore->setAddress("1 Flinders St Melbourne VIC Australia");
         $this->assertEquals($bookstore->getAddress(), "1 Flinders St Melbourne VIC Australia");
     }
-    
-    public function testHasOpenAt()
+
+    public function testHasOpenedAt()
     {
         $date = date("Y-m-d H:i:s");
         $bookstore = new BookStore;
-        $bookstore->setOpenAt($date);
-        $this->assertEquals($bookstore->getOpenAt(), $date);
+        $bookstore->setOpenedAt($date);
+        $this->assertEquals($bookstore->getOpenedAt(), $date);
     }
 }

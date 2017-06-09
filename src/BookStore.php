@@ -7,7 +7,7 @@ class BookStore
     protected $id;
     protected $name;
     protected $address;
-    protected $openAt;
+    protected $openedAt;
 
     public function setName($name)
     {
@@ -19,9 +19,9 @@ class BookStore
         $this->address = $address;
     }
 
-    public function setOpenAt($openAt)
+    public function setOpenedAt($openedAt)
     {
-        $this->openAt = $openAt;
+        $this->openedAt = $openedAt;
     }
 
     public function getId()
@@ -39,8 +39,8 @@ class BookStore
         return $this->address;
     }
 
-    public function getOpenAt()
+    public function getOpenedAt()
     {
-        return $this->openAt;
+        return $this->openedAt;
     }
 }
