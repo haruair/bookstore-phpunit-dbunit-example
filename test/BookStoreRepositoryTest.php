@@ -44,4 +44,23 @@ class BookStoreRepositoryTest extends TestCase
         $this->assertEquals($bookstores[0]->getId(), 1);
         $this->assertEquals($bookstores[0]->getName(), 'Polarbear Bookstore');
     }
+    
+    public function testCanSaveNewBookStore()
+    {
+        $context = $this->getPDO();
+        $repository = new BookStoreRepository($context);
+
+        $openedAt = date('Y-m-d H:i:s');
+
+        $bookstore = new BookStore;
+        $bookstore->setName('HelloWorld Bookstore');
+        $bookstore->setAddress('Unknown');
+        $bookstore->setOpenedAt($openedAt);
+
+        $repository->save($bookstore);
+        $foundBookstore = $repository->find(3);
+
+        $this->assertEquals($foundBookstore->getId(), 3);
+        $this->assertEquals($foundBookstore->getName(), 'HelloWorld Bookstore');
+    }
 }
