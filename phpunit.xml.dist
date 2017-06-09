@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true"
+         bootstrap="vendor/autoload.php"
+         stderr="true">
+    <testsuites>
+        <testsuite name="all">
+		<directory suffix="Test.php">test/</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <var name="DB_DSN" value="mysql:dbname=tutorial;host=localhost" />
+        <var name="DB_USER" value="mysql" />
+        <var name="DB_PASSWORD" value="mysql" />
+        <var name="DB_DBNAME" value="tutorial" />
+    </php>
+</phpunit>

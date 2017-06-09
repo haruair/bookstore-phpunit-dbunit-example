@@ -1,0 +1,20 @@
+{
+    "name": "ekim/php-dbunit-study",
+    "authors": [
+        {
+            "name": "Edward Kim",
+            "email": "ekim@swin.edu.au"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "BookStore\\": "src",
+        "BookStore\\Test\\": "test"
+      }
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6.1",
+        "phpunit/dbunit": "^3.0"
+    }
+}
