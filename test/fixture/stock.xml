@@ -1,0 +1,77 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="book">
+        <column>id</column>
+        <column>title</column>
+        <column>author</column>
+        <column>publisher</column>
+        <column>ISBN</column>
+        <row>
+            <value>1</value>
+            <value>TDD by example</value>
+            <value>Some Back</value>
+            <value>Good Book</value>
+            <value>0123456789123</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>Domain Driven Development</value>
+            <value>John Doe</value>
+            <value>Great Book</value>
+            <value>0123456789124</value>
+        </row>
+    </table>
+    <table name="bookstore">
+        <column>id</column>
+        <column>name</column>
+        <column>address</column>
+        <column>openedAt</column>
+        <row>
+            <value>1</value>
+            <value>Polarbear Bookstore</value>
+            <value>1 Polar St North Pole</value>
+            <value>2000-01-01 00:00:00</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>PHP Bookstore</value>
+            <value>PHP Road Armadale VIC AU</value>
+            <value>2010-01-01 00:00:00</value>
+        </row>
+    </table>
+    <table name="stock">
+        <column>id</column>
+        <column>bookId</column>
+        <column>bookstoreId</column>
+        <row>
+            <value>1</value>
+            <value>1</value>
+            <value>1</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>1</value>
+            <value>1</value>
+        </row>
+        <row>
+            <value>3</value>
+            <value>2</value>
+            <value>1</value>
+        </row>
+        <row>
+            <value>4</value>
+            <value>2</value>
+            <value>1</value>
+        </row>
+        <row>
+            <value>5</value>
+            <value>2</value>
+            <value>1</value>
+        </row>
+        <row>
+            <value>6</value>
+            <value>1</value>
+            <value>2</value>
+        </row>
+    </table>
+</dataset>
