@@ -5,6 +5,7 @@ namespace BookStore;
 use BookStore\Util\InternalPropertyAssignTrait;
 
 use PDO;
+use InvalidArgumentException;
 
 class BookStoreRepository
 {
@@ -54,6 +55,10 @@ class BookStoreRepository
 
     public function save(BookStore $bookstore)
     {
+        if ($bookstore->getId() !== null) {
+            return $this->update($bookstore);
+        }
+
         $stmt = $this->db->prepare('INSERT INTO `bookstore`
           SET
             name = :name,
@@ -66,5 +71,35 @@ class BookStoreRepository
 
         $id = $this->db->lastInsertId();
         $this->assignInternalProperty($bookstore, 'id', $id);
+    }
+    
+    public function update(BookStore $bookstore)
+    {
+        $stmt = $this->db->prepare('UPDATE `bookstore`
+          SET
+            name = :name,
+            address = :address,
+            openedAt = :openedAt
+          WHERE
+            id = :id
+        ');
+
+        $params = $this->convertToParams($bookstore);
+        $stmt->execute($params);
+    }
+
+    public function remove(BookStore $bookstore)
+    {
+        if ($bookstore->getId() === null) {
+            throw new InvalidArgumentException('BookStore id does not exist.');
+        }
+
+        $stmt = $this->db->prepare('DELETE FROM `bookstore` WHERE id = :id');
+
+        $stmt->execute([
+            ':id' => $bookstore->getId(),
+        ]);
+
+        return $stmt->rowCount() > 0;
     }
 }

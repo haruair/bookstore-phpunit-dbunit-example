@@ -63,4 +63,61 @@ class BookStoreRepositoryTest extends TestCase
         $this->assertEquals($foundBookstore->getId(), 3);
         $this->assertEquals($foundBookstore->getName(), 'HelloWorld Bookstore');
     }
+    
+    public function testCanUpdateExistingBookstore()
+    {
+        $context = $this->getPDO();
+        $repository = new BookStoreRepository($context);
+
+        $bookstore = $repository->find(1);
+        $originalName = $bookstore->getName();
+
+        $bookstore->setName('Koala Bookstore');
+        $repository->save($bookstore);
+
+        $updatedBookstore = $repository->find(1);
+        $updatedBookstoreName = $updatedBookstore->getName();
+        $updatedBookstoreAddress = $updatedBookstore->getAddress();
+
+        $updatedBookstore->setAddress('Malvern Rd Malvern VIC AU');
+        $repository->update($updatedBookstore);
+
+        $updatedAgainBookstore = $repository->find(1);
+        $updatedAgainBookstoreAddress = $updatedBookstore->getAddress();
+
+        $this->assertEquals($originalName, 'Polarbear Bookstore');
+
+        $this->assertEquals($updatedBookstoreName, 'Koala Bookstore');
+        $this->assertEquals($updatedBookstoreAddress, '1 Polar St North Pole');
+
+        $this->assertEquals($updatedAgainBookstoreAddress, 'Malvern Rd Malvern VIC AU');
+    }
+
+    public function testCanRemoveTheBookstore()
+    {
+        $context = $this->getPDO();
+        $repository = new BookStoreRepository($context);
+
+        $bookstore = $repository->find(1);
+        $result = $repository->remove($bookstore);
+
+        $destroyed = $repository->find(1);
+
+        $this->assertNotNull($bookstore);
+        $this->assertTrue($result);
+        $this->assertNull($destroyed);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage BookStore id does not exist.
+     */
+    public function testCannotRemoveTheBookStoreIfBookStoreDoesNotHaveId()
+    {
+        $context = $this->getPDO();
+        $repository = new BookStoreRepository($context);
+        
+        $bookstore = new BookStore;
+        $result = $repository->remove($bookstore);
+    }
 }
