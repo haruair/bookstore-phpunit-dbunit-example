@@ -24,4 +24,12 @@ class BookStoreRepository
         $object = $stmt->fetch();
         return $object !== false ? $object : null;
     }
+
+    public function findAll()
+    {
+        $stmt = $this->db->prepare('SELECT * FROM `bookstore`');
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, BookStore::class);
+    }
 }

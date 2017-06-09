@@ -32,4 +32,16 @@ class BookStoreRepositoryTest extends TestCase
         $this->assertInstanceOf(BookStore::class, $bookStoreSecond);
         $this->assertEquals($bookStoreSecond->getName(), 'PHP Bookstore');
     }
+
+    public function testCanFindAllBookStore()
+    {
+        $context = $this->getPDO();
+        $repository = new BookStoreRepository($context);
+        
+        $bookstores = $repository->findAll();
+
+        $this->assertEquals(count($bookstores), 2);
+        $this->assertEquals($bookstores[0]->getId(), 1);
+        $this->assertEquals($bookstores[0]->getName(), 'Polarbear Bookstore');
+    }
 }
