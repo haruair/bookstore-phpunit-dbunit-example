@@ -39,6 +39,22 @@ class BookRepository
         return $stmt->fetchAll(PDO::FETCH_CLASS, Book::class);
     }
 
+    protected function convertToParams(Book $book)
+    {
+        $params = [
+            ':title' => $book->getTitle(),
+            ':author' => $book->getAuthor(),
+            ':publisher' => $book->getPublisher(),
+            ':ISBN' => $book->getISBN(),
+        ];
+
+        if ($book->getId() !== null) {
+          $params[':id'] = $book->getId();
+        }
+
+        return $params;
+    }
+
     public function save(Book $book)
     {
         if ($book->getId() !== null) {
@@ -52,13 +68,9 @@ class BookRepository
             publisher = :publisher,
             ISBN = :ISBN
         ');
-
-        $stmt->execute([
-            ':title' => $book->getTitle(),
-            ':author' => $book->getAuthor(),
-            ':publisher' => $book->getPublisher(),
-            ':ISBN' => $book->getISBN(),
-        ]);
+        
+        $params = $this->convertToParams($book);
+        $stmt->execute($params);
 
         $id = $this->db->lastInsertId();
         $this->assignInternalProperty($book, 'id', $id);
@@ -76,13 +88,8 @@ class BookRepository
             id = :id
         ');
 
-        $stmt->execute([
-            ':id' => $book->getId(),
-            ':title' => $book->getTitle(),
-            ':author' => $book->getAuthor(),
-            ':publisher' => $book->getPublisher(),
-            ':ISBN' => $book->getISBN(),
-        ]);
+        $params = $this->convertToParams($book);
+        $stmt->execute($params);
     }
 
     public function remove(Book $book)
