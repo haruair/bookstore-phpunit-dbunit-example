@@ -58,7 +58,7 @@ class BookRepositoryTest extends TestCase
         $repository->save($book);
         $foundBook = $repository->find(3);
 
-        $this->assertEquals($book->getId(), 3);
+        $this->assertEquals($foundBook->getId(), 3);
         $this->assertEquals($foundBook->getTitle(), 'Hello World With PHP');
     }
 
