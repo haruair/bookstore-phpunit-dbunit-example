@@ -2,7 +2,6 @@
 
 namespace BookStore;
 
-use BookStore\Book;
 use BookStore\Util\InternalPropertyAssignTrait;
 
 use InvalidArgumentException;
